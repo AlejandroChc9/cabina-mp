@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "bytes": 43352802,
+  "sha256": "7fadd12fc19c8ae08c78cd034b2a673a21e0aee9691f1cb9f0b344eef8f2f9e4",
+  "parts": [
+    {
+      "path": "publication/part-000.bin",
+      "bytes": 6291456,
+      "sha256": "a71aeed209bdddd7a83b02104b23f6d93a797b5166aecc827c361ca6583972a6"
+    },
+    {
+      "path": "publication/part-001.bin",
+      "bytes": 6291456,
+      "sha256": "c828c0d4f41b970be7c513e8dbe4a83a00d935b79437fcc23159adb50876eab9"
+    },
+    {
+      "path": "publication/part-002.bin",
+      "bytes": 6291456,
+      "sha256": "f461fdbbed4ba4876d354107a843bac053121f53b2f58be1121431502d260441"
+    },
+    {
+      "path": "publication/part-003.bin",
+      "bytes": 6291456,
+      "sha256": "d771479fe542fe0ad015273a902a5e912654b025bfbb82d4992661c8e115f592"
+    },
+    {
+      "path": "publication/part-004.bin",
+      "bytes": 6291456,
+      "sha256": "da78bdeac354f8eac3bf6df0b54b3e34e1ee26805c2ff45d2ccead1151bc6eaa"
+    },
+    {
+      "path": "publication/part-005.bin",
+      "bytes": 6291456,
+      "sha256": "1192a7a22dcf4934ef6b5e99151d4e5148d74bd33fe200ba83fbaa54a8ffd8db"
+    },
+    {
+      "path": "publication/part-006.bin",
+      "bytes": 5604066,
+      "sha256": "f724b465bbfced21bdd59d880f987dff6688914a7d4255ea082388e9755ca653"
+    }
+  ]
+}
+
