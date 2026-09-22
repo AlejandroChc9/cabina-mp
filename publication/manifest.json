@@ -1,11 +1,12 @@
 {
   "format": 2,
   "compression": "gzip",
-  "bytes": 73214180,
-  "sha256": "445fd7b94e306813b73e2c45ad9c1f597f4f833345641460c1ac9012138dac89",
+  "bytes": 18396967,
+  "sha256": "e2d23bf4f79c7150480f0cb8834ee8c45ac701128304cbd90af8b8b575bb1309",
   "payload": {
     "path": "publication/dashboard.html.gz",
-    "bytes": 26434847,
-    "sha256": "3044f8004dcb6b21c5c9bfb72e4dc3536a8d63df9e137d63b587bcfab9c30840"
+    "bytes": 13377749,
+    "sha256": "53a3d4edaccb534836ef5d3541f14ed18e7b5b7adfcf64f5b0503c175f9e4f88"
   }
 }
+
