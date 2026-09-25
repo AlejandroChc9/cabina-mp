@@ -1,4 +1,4 @@
-name: Publicar Cabina MP
+name: Publicar Cabina MP protegida
 on:
   push:
     branches: [main]
@@ -18,13 +18,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - name: Reconstruir HTML y verificar integridad
-        run: node assemble.mjs
+      - name: Verificar interfaz sin datos
+        run: |
+          test "$(find site -type f | wc -l)" -eq 6
+          ! grep -rE 'mp-data-gzip|sb_secret_|payload_gzip_base64|service_role' site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: _site
+          path: site
       - name: Publicar
         id: deployment
         uses: actions/deploy-pages@v4
-
