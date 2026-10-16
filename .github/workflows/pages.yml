@@ -20,8 +20,21 @@ jobs:
       - uses: actions/checkout@v6
       - name: Verificar interfaz sin datos
         run: |
-          test "$(find site -type f | wc -l)" -eq 6
-          ! grep -rE 'mp-data-gzip|sb_secret_|payload_gzip_base64|service_role' site
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root = Path('site')
+          files = [p for p in root.iterdir() if p.is_file()]
+          assert len(files) == 6, 'Cambió el portal raíz'
+          for p in files:
+              assert not re.search(r'mp-data-gzip|sb_secret_|payload_gzip_base64|service_role', p.read_text()), p
+          mobile = root / 'supervisor'
+          expected = ["index.html","app.js","app.css","core.js","session.js","entry.js","robots.txt"]
+          assert sorted(str(p.relative_to(mobile)) for p in mobile.rglob('*') if p.is_file()) == sorted(expected)
+          for name in expected:
+              text = (mobile / name).read_text()
+              assert not re.search(r'mp-data-gzip|sb_secret_|service_role|globalThis\.MP_DATA\s*=\s*\{', text), name
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
