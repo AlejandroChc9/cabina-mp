@@ -1,4 +1,5 @@
-import {SupervisorSession} from './session.js';
+const uiVersion=new URL(import.meta.url).searchParams.get('v')||'';
+const {SupervisorSession}=await import('./session.js?v='+encodeURIComponent(uiVersion));
 const session=new SupervisorSession(),$=s=>document.querySelector(s);let manifest,activeScope,checking=false,started=false,generation=0;
 function lock(message){generation++;$('#protected-content').hidden=true;$('#account-bar').hidden=true;$('#auth-panel').hidden=false;$('#auth-message').textContent=message;$('#app').replaceChildren();$('#overlay').replaceChildren();$('#toast').textContent='';document.body.style.overflow='';delete globalThis.MP_DATA;delete globalThis.MP;}
 async function enter(){
@@ -7,7 +8,7 @@ async function enter(){
  activeScope=id;globalThis.MP_DATA=packet.data;
  const selector=$('#account-scope');selector.replaceChildren(...manifest.scopeRows.map(r=>{const opt=document.createElement('option');opt.value=r.scope_id;opt.textContent=r.scope.label;return opt;}));selector.value=id;selector.disabled=manifest.scopeRows.length===1;
  $('#auth-panel').hidden=true;$('#protected-content').hidden=false;$('#account-bar').hidden=false;$('#account-status').textContent='Corte '+packet.data.defaultCut.split('-').reverse().join('/');
- if(!started){started=true;await import('./core.js');await import('./app.js');}else location.reload();
+ if(!started){started=true;await import('./core.js?v='+encodeURIComponent(uiVersion));await import('./app.js?v='+encodeURIComponent(uiVersion));}else location.reload();
 }
 $('#auth-form').addEventListener('submit',async e=>{e.preventDefault();$('#auth-submit').disabled=true;$('#auth-message').textContent='Verificando tu acceso…';try{await session.login($('#auth-email').value.trim(),$('#auth-password').value);await enter();}catch(e){lock(e.message);}finally{$('#auth-password').value='';$('#auth-submit').disabled=false;}});
 $('#logout').addEventListener('click',async()=>{lock('Sesión cerrada.');sessionStorage.removeItem('mps-chosen-scope');await session.logout();location.reload();});
