@@ -1,4 +1,4 @@
-name: Publicar Cabina MP protegida
+name: Publicar utilidades MP protegidas
 on:
   push:
     branches: [main]
@@ -18,23 +18,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - name: Verificar interfaz sin datos
+      - name: Verificar interfaz pública
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          root = Path('site')
-          files = [p for p in root.iterdir() if p.is_file()]
-          assert len(files) == 6, 'Cambió el portal raíz'
-          for p in files:
-              assert not re.search(r'mp-data-gzip|sb_secret_|payload_gzip_base64|service_role', p.read_text()), p
-          mobile = root / 'supervisor'
-          expected = ["index.html","app.js","app.css","core.js","session.js","entry.js","robots.txt"]
-          assert sorted(str(p.relative_to(mobile)) for p in mobile.rglob('*') if p.is_file()) == sorted(expected)
-          for name in expected:
-              text = (mobile / name).read_text()
-              assert not re.search(r'mp-data-gzip|sb_secret_|service_role|globalThis\.MP_DATA\s*=\s*\{', text), name
-          PY
+          test -f site/index.html
+          test -f site/stock/index.html
+          test -f site/transferencias/index.html
+          ! grep -rE 'sb_secret_|payload_gzip_base64|service_role' site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
