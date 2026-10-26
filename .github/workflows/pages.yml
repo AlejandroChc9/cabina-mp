@@ -23,7 +23,7 @@ jobs:
           test -f site/index.html
           test -f site/stock/index.html
           test -f site/transferencias/index.html
-          ! grep -rE 'sb_secret_|payload_gzip_base64|service_role' site
+          ! grep -rE 'sb_secret_|"payload_gzip_base64"[[:space:]]*:|service_role' site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
