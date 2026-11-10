@@ -1,0 +1,1 @@
+var e={getItem:e=>globalThis.localStorage.getItem(e),setItem:(e,t)=>{typeof window<`u`&&window.localStorage?window.localStorage.setItem(e,t):globalThis.localStorage.setItem(e,t)},removeItem:e=>globalThis.localStorage.removeItem(e)};export{e as t};
